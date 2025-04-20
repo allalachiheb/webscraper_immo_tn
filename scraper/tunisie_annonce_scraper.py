@@ -35,8 +35,16 @@ def scrape_tayara(nb_pages=2):
                     titre = article.find_element(By.CSS_SELECTOR, "h2.card-title").text.strip()
                     prix_elem = article.find_elements(By.CSS_SELECTOR, "data")
                     prix = prix_elem[0].text.strip() if prix_elem else "Non spécifié"
-                    locs = article.find_elements(By.CSS_SELECTOR, "div.text-neutral-500")
+
+                    locs = article.find_elements(By.CSS_SELECTOR, "span.text-neutral-500")
                     localisation = locs[-1].text.strip() if locs else "Inconnu"
+
+                    # Extraire uniquement la ville
+                    if "," in localisation:
+                        ville = localisation.split(",")[0].strip()
+                    else:
+                        ville = localisation.strip()
+
                     a_tag = article.find_element(By.TAG_NAME, "a")
                     lien = a_tag.get_attribute("href")
                     if lien.startswith("/"):
@@ -45,7 +53,7 @@ def scrape_tayara(nb_pages=2):
                     annonces.append({
                         "titre": titre,
                         "prix": prix,
-                        "localisation": localisation,
+                        "ville": ville,
                         "url": lien
                     })
                 except Exception as e:
@@ -69,9 +77,3 @@ def scrape_tayara(nb_pages=2):
 # Pour exécution directe
 if __name__ == "__main__":
     scrape_tayara(nb_pages=2)
-
-
-
-
-
-
