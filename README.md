@@ -1,24 +1,59 @@
-# 📊 Web Scraper Immobilier – Tunisie
+#  Webscraper Immobilier Tunisie
 
-Ce projet récupère des annonces immobilières depuis le site **Tayara.tn** grâce à un script Python (Selenium), et les rend disponibles via une API Flask.
+Ce projet a pour but de scraper automatiquement des annonces immobilières depuis le site [Tayara.tn](https://www.tayara.tn) et de les afficher dans un tableau de bord interactif.
 
-## 🔧 Fonctionnalités
+##  Technologies utilisées
 
-- ✅ Scraping des annonces (titre, prix, localisation, lien)
-- ✅ Stockage dans `data/annonces.csv`
-- ✅ API REST avec :
-  - `GET /annonces` : Liste des annonces
-  - `POST /scrape` : Lance une collecte automatique
+- **Python**
+- **Selenium** pour le scraping
+- **Pandas** pour la manipulation de données
+- **Plotly & Dash** pour le tableau de bord interactif
+- **Flask** (partie 1) pour l'API REST
 
-## ▶️ Lancer le projet
+##  Structure du projet
 
-1. Activer l’environnement :
+```
+webscraper_immo_tn/
+├── api/                        # API Flask (Partie 1)
+├── scraper/                    # Script de scraping
+│   └── tunisie_annonce_scraper.py
+├── dashboard/                  # Tableau de bord Dash (Partie 2)
+│   └── app.py
+├── data/
+│   └── annonces.csv            # Données extraites
+├── requirements.txt
+└── README.md
+```
+
+##  Lancer le projet
+
+### 1. Installer les dépendances
 ```bash
-venv\Scripts\activate
-2,Installer les dépendances :
 pip install -r requirements.txt
-3-Lancer l’API :
-python api/app.py
- 4-Tester avec Postman
-GET http://127.0.0.1:5000/annonces
-POST http://127.0.0.1:5000/scrape
+```
+
+### 2. Lancer le scraping
+```bash
+python scraper/tunisie_annonce_scraper.py
+```
+
+### 3. Lancer le dashboard Dash
+```bash
+python dashboard/app.py
+```
+
+Puis ouvrir [http://127.0.0.1:8050](http://127.0.0.1:8050) dans le navigateur.
+
+##  Graphiques disponibles
+
+- Nombre d’annonces par ville
+- Distribution des prix
+- Analyse comparative des prix par ville
+
+##  Auteur
+
+Projet réalisé par **Chiheb Allala et Mounir Hannouna** dans le cadre du module **Web Scraping & Visualisation - 2025**
+
+---
+
+> Pour toute question ou suggestion, n'hésitez pas à ouvrir une issue !
